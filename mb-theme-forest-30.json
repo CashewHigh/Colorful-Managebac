@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "defaultRules": [],
+  "scoped": {
+    "class:11422326": [
+      { "selector": ".assignments-progress-chart .highcharts-series-0 .highcharts-point",  "color": "#0B6623", "target": "all", "nth": 1,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-1 .highcharts-point",  "color": "#127B2B", "target": "all", "nth": 2,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-2 .highcharts-point",  "color": "#228B22", "target": "all", "nth": 3,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-3 .highcharts-point",  "color": "#2E8B57", "target": "all", "nth": 4,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-4 .highcharts-point",  "color": "#3CB371", "target": "all", "nth": 5,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-5 .highcharts-point",  "color": "#66CDAA", "target": "all", "nth": 6,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-6 .highcharts-point",  "color": "#8FD7A4", "target": "all", "nth": 7,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-7 .highcharts-point",  "color": "#B2E5C0", "target": "all", "nth": 8,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-8 .highcharts-point",  "color": "#C9EFCF", "target": "all", "nth": 9,  "name": "",  "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-9 .highcharts-point", "color": "#DFF4E1", "target": "all", "nth": 10, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-10 .highcharts-point", "color": "#8F9779", "target": "all", "nth": 11, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-11 .highcharts-point", "color": "#7BB274", "target": "all", "nth": 12, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-12 .highcharts-point", "color": "#6AA06A", "target": "all", "nth": 13, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-13 .highcharts-point", "color": "#5E8F5E", "target": "all", "nth": 14, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-14 .highcharts-point", "color": "#4E7F4E", "target": "all", "nth": 15, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-15 .highcharts-point", "color": "#3E6E3E", "target": "all", "nth": 16, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-16 .highcharts-point", "color": "#2E5E2E", "target": "all", "nth": 17, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-17 .highcharts-point", "color": "#1F4F1F", "target": "all", "nth": 18, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-18 .highcharts-point", "color": "#15441A", "target": "all", "nth": 19, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-19 .highcharts-point", "color": "#0B3A16", "target": "all", "nth": 20, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-20 .highcharts-point", "color": "#2C5F2C", "target": "all", "nth": 21, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-21 .highcharts-point", "color": "#417B41", "target": "all", "nth": 22, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-22 .highcharts-point", "color": "#588B58", "target": "all", "nth": 23, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-23 .highcharts-point", "color": "#6EA86E", "target": "all", "nth": 24, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-24 .highcharts-point", "color": "#86C286", "target": "all", "nth": 25, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-25 .highcharts-point", "color": "#9FD99F", "target": "all", "nth": 26, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-26 .highcharts-point", "color": "#B8E8B8", "target": "all", "nth": 27, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-27 .highcharts-point", "color": "#D1F7D1", "target": "all", "nth": 28, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-28 .highcharts-point", "color": "#E8FFE8", "target": "all", "nth": 29, "name": "", "enabled": true },
+      { "selector": ".assignments-progress-chart .highcharts-series-29 .highcharts-point", "color": "#F6FFF6", "target": "all", "nth": 30, "name": "", "enabled": true }
+    ]
+  },
+  "recentColors": ["#0B6623","#127B2B","#228B22","#2E8B57","#3CB371","#66CDAA","#8FD7A4","#B2E5C0","#C9EFCF","#DFF4E1","#8F9779","#7BB274","#6AA06A","#5E8F5E","#4E7F4E","#3E6E3E","#2E5E2E","#1F4F1F","#15441A","#0B3A16","#2C5F2C","#417B41","#588B58","#6EA86E","#86C286","#9FD99F","#B8E8B8","#D1F7D1","#E8FFE8","#F6FFF6"]
+}
