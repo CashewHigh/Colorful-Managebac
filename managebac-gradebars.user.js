@@ -216,7 +216,7 @@
 
         const toggleBtn = document.createElement('button');
         toggleBtn.id = 'mb-gb-toggle';
-        toggleBtn.textContent = 'GB';
+        toggleBtn.textContent = '🎨';
         toggleBtn.title = 'Grade bars theme';
         toggleBtn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483646;background:#0b79ff;color:#fff;border:none;border-radius:10px;padding:9px 11px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(11,121,255,0.22);';
         document.body.appendChild(toggleBtn);
