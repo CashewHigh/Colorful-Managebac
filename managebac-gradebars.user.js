@@ -36,6 +36,11 @@
                 // migrate old array -> defaultRules
                 return {version:1, defaultRules:obj, scoped:{}, recentColors:[], palettes: [], activePalette: null, usePalette: false};
             }
+            // normalize if scoped was stored as an array (old/other export formats)
+            if(obj && obj.scoped && Array.isArray(obj.scoped)){
+                obj.defaultRules = (obj.defaultRules || []).concat(obj.scoped || []);
+                obj.scoped = {};
+            }
             return {
                 version:1,
                 defaultRules: obj.defaultRules || [],
@@ -150,11 +155,11 @@
                         <select id="mb-gb-palette-select" style="padding:8px;border-radius:8px;border:1px solid #ddd;font-size:14px">
                             <option value="">— Select palette —</option>
                             <option value="rainbow">Rainbow</option>
-                            <option value="pastel">Pastel</option>
                             <option value="ocean">Ocean</option>
                             <option value="forest">Forest</option>
                             <option value="sunset">Sunset</option>
                         </select>
+                        <button id="mb-gb-apply-theme" style="padding:8px;border-radius:8px;border:1px solid #0b79ff;background:#0b79ff;color:#fff;cursor:pointer;margin-left:6px">Apply Theme</button>
                         <input id="mb-gb-import-palette-file" type="file" accept=".json" style="display:none">
                         <button id="mb-gb-import-palette-btn" style="padding:8px;border-radius:8px;border:1px solid #0b79ff;background:#fff;color:#0b79ff;cursor:pointer;margin-left:6px">Import palette</button>
                     </div>
@@ -297,6 +302,63 @@
                     });
                     paletteSelect.addEventListener('change', ()=>{
                         const st = loadStorage(); st.activePalette = paletteSelect.value || null; saveStorage(st); renderSwatches(); applyRules();
+                    });
+                    // Apply Theme button: generate scoped theme rules (series 0..49) for the current class
+                    const applyThemeBtn = panel.querySelector('#mb-gb-apply-theme');
+                    applyThemeBtn && applyThemeBtn.addEventListener('click', ()=>{
+                        const st = loadStorage();
+                        if(!st.activePalette){ return alert('Select a palette first'); }
+                        st.usePalette = true;
+                        // enable usePalette in UI
+                        usePaletteChk.checked = true;
+                        renderSwatches();
+
+                        // Resolve active palette colors (user or built-in)
+                        let paletteColors = [];
+                        if(typeof st.activePalette === 'string' && st.activePalette.indexOf('user:') === 0){
+                            const idx = parseInt(st.activePalette.split(':')[1],10);
+                            paletteColors = (st.palettes && st.palettes[idx] && st.palettes[idx].colors) || [];
+                        }else{
+                            paletteColors = PRESET_PALETTES[st.activePalette] || [];
+                        }
+                        if(!paletteColors || !paletteColors.length) return alert('Selected palette has no colors');
+
+                        // Build 50 series rules
+                        const seriesRules = [];
+                        for(let i = 0; i < 50; i++){
+                            const color = paletteColors[Math.floor(Math.random()*paletteColors.length)];
+                            seriesRules.push({
+                                selector: `.assignments-progress-chart .highcharts-series-${i} .highcharts-point`,
+                                color: color,
+                                target: 'all',
+                                nth: i+1,
+                                name: '',
+                                enabled: true
+                            });
+                        }
+
+                        // Decide where to save: respect scope select (global = defaultRules, this = class-scoped)
+                        const scopeValue = (scopeSel && scopeSel.value) ? scopeSel.value : 'global';
+                        // ensure storage shapes exist
+                        st.defaultRules = st.defaultRules || [];
+                        st.scoped = st.scoped || {};
+
+                        // Merge generated series into defaultRules to guarantee immediate application
+                        const keyOf = r => `${r.selector}||${r.color}||${r.target||''}||${r.nth||''}||${r.name||''}`;
+                        const existingSet = new Set((st.defaultRules||[]).map(keyOf));
+                        seriesRules.forEach(r => { const k = keyOf(r); if(!existingSet.has(k)){ st.defaultRules.push(r); existingSet.add(k); } });
+
+                        // If user requested class-scoped, also write into scoped[class:id]
+                        if(scopeValue !== 'global'){
+                            const scopeKey = getCurrentScopeKey();
+                            st.scoped[scopeKey] = seriesRules.slice();
+                        }
+
+                        // Persist and apply — no automatic download
+                        saveStorage(st);
+                        renderRules(); applyRules();
+                        const displayScope = (scopeValue === 'global') ? 'global' : getCurrentScopeKey();
+                        alert('Applied theme ('+displayScope+') with 50 series');
                     });
                     importPaletteBtn.addEventListener('click', ()=>{ if(importPaletteFile) importPaletteFile.click(); });
                     importPaletteFile && importPaletteFile.addEventListener('change', async (ev)=>{
