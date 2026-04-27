@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Theme ManageBac grade bars only (bars 1-50) with built-in/imported palettes and settings import/export.
-// @author       GitHub Copilot
+// @author       The Interwebs
 // @match        https://*.managebac.cn/*
 // @match        https://managebac.cn/*
 // @grant        GM_getValue
@@ -191,6 +191,9 @@
         panel.style.cssText = 'position:fixed;right:16px;bottom:62px;z-index:2147483647;background:#fff;border:1px solid rgba(0,0,0,0.12);padding:12px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.15);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px;min-width:320px;max-width:420px;display:none;';
         panel.innerHTML = `
             <div style="font-weight:600;margin-bottom:10px">Grade Bars Theme (1-50)</div>
+            <div style="margin:-2px 0 10px;padding:7px 8px;border:1px solid #f0cf75;border-radius:8px;background:#fff7dc;color:#7a4f00;font-size:12px;line-height:1.35;">
+                If the extension is not acting according to plan, refresh the page.
+            </div>
             <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
                 <label style="display:flex;align-items:center;gap:6px;">
                     <input id="mb-gb-enabled" type="checkbox">
@@ -378,6 +381,13 @@
         applyThemeStyles();
     }
 
+    let lastHref = location.href;
+    function handleUrlChange() {
+        if (location.href === lastHref) return;
+        lastHref = location.href;
+        boot();
+    }
+
     boot();
 
     const observer = new MutationObserver(() => {
@@ -392,6 +402,23 @@
             applyThemeStyles();
         });
     });
+
+    const _pushState = history.pushState;
+    history.pushState = function () {
+        const ret = _pushState.apply(this, arguments);
+        handleUrlChange();
+        return ret;
+    };
+
+    const _replaceState = history.replaceState;
+    history.replaceState = function () {
+        const ret = _replaceState.apply(this, arguments);
+        handleUrlChange();
+        return ret;
+    };
+
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
 
     try {
         if (typeof GM_registerMenuCommand === 'function') {
